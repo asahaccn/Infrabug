@@ -8,7 +8,7 @@ RUN yum update -y && \
 # Set working directory
 WORKDIR /var/www/html
 
-# Download and unzip web files
+# Download and unzip web files # refernce from techmax demo site
 RUN wget https://github.com/azeezsalu/techmax/archive/refs/heads/main.zip && \
     unzip main.zip && \
     cp -r techmax-main/* . && \
