@@ -84,7 +84,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t3.micro"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
-  key_name               = "mumbai-1"
+  key_name               = "your-ec2-key"
 
   tags = {
     Name = "docker server"
@@ -96,12 +96,12 @@ resource "null_resource" "docker_setup" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("/Users/arpansaha/Downloads/mumbai-1.pem") # update!
+    private_key = file("/Users/your-username/Downloads/mumbai-1.pem") # update!
     host        = aws_instance.ec2_instance.public_ip
   }
 
   provisioner "file" {
-    source      = "/Users/arpansaha/Downloads/my_password.txt" # update!
+    source      = "/Users/your-username/Downloads/my_password.txt" # update!
     destination = "/home/ec2-user/my_password.txt"
   }
 
@@ -131,8 +131,4 @@ output "container_url" {
 }
 
 
-#Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
-#Outputs:
-
-#container_url = "http://ec2-15-206-79-76.ap-south-1.compute.amazonaws.com"
